@@ -1,0 +1,547 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> exp
+Rule 1     exp -> exp IMPLIES exp1
+Rule 2     exp -> exp EQUIVALENT exp1
+Rule 3     exp -> exp1
+Rule 4     exp1 -> exp1 OR exp2
+Rule 5     exp1 -> exp1 NOR exp2
+Rule 6     exp1 -> exp2
+Rule 7     exp2 -> exp2 XOR exp3
+Rule 8     exp2 -> exp3
+Rule 9     exp3 -> exp3 AND exp4
+Rule 10    exp3 -> exp3 NAND exp4
+Rule 11    exp3 -> exp4
+Rule 12    exp4 -> NOT exp4
+Rule 13    exp4 -> exp5
+Rule 14    exp5 -> LPAREN exp RPAREN
+Rule 15    exp5 -> TRUE
+Rule 16    exp5 -> FALSE
+
+Terminals, with rules where they appear
+
+AND                  : 9
+EQUIVALENT           : 2
+FALSE                : 16
+IMPLIES              : 1
+LPAREN               : 14
+NAND                 : 10
+NOR                  : 5
+NOT                  : 12
+OR                   : 4
+RPAREN               : 14
+TRUE                 : 15
+XOR                  : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+exp                  : 1 2 14 0
+exp1                 : 1 2 3 4 5
+exp2                 : 4 5 6 7
+exp3                 : 7 8 9 10
+exp4                 : 9 10 11 12
+exp5                 : 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . exp
+    (1) exp -> . exp IMPLIES exp1
+    (2) exp -> . exp EQUIVALENT exp1
+    (3) exp -> . exp1
+    (4) exp1 -> . exp1 OR exp2
+    (5) exp1 -> . exp1 NOR exp2
+    (6) exp1 -> . exp2
+    (7) exp2 -> . exp2 XOR exp3
+    (8) exp2 -> . exp3
+    (9) exp3 -> . exp3 AND exp4
+    (10) exp3 -> . exp3 NAND exp4
+    (11) exp3 -> . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp                            shift and go to state 1
+    exp1                           shift and go to state 2
+    exp2                           shift and go to state 3
+    exp3                           shift and go to state 4
+    exp4                           shift and go to state 5
+    exp5                           shift and go to state 7
+
+state 1
+
+    (0) S' -> exp .
+    (1) exp -> exp . IMPLIES exp1
+    (2) exp -> exp . EQUIVALENT exp1
+
+    IMPLIES         shift and go to state 11
+    EQUIVALENT      shift and go to state 12
+
+
+state 2
+
+    (3) exp -> exp1 .
+    (4) exp1 -> exp1 . OR exp2
+    (5) exp1 -> exp1 . NOR exp2
+
+    IMPLIES         reduce using rule 3 (exp -> exp1 .)
+    EQUIVALENT      reduce using rule 3 (exp -> exp1 .)
+    $end            reduce using rule 3 (exp -> exp1 .)
+    RPAREN          reduce using rule 3 (exp -> exp1 .)
+    OR              shift and go to state 13
+    NOR             shift and go to state 14
+
+
+state 3
+
+    (6) exp1 -> exp2 .
+    (7) exp2 -> exp2 . XOR exp3
+
+    OR              reduce using rule 6 (exp1 -> exp2 .)
+    NOR             reduce using rule 6 (exp1 -> exp2 .)
+    IMPLIES         reduce using rule 6 (exp1 -> exp2 .)
+    EQUIVALENT      reduce using rule 6 (exp1 -> exp2 .)
+    $end            reduce using rule 6 (exp1 -> exp2 .)
+    RPAREN          reduce using rule 6 (exp1 -> exp2 .)
+    XOR             shift and go to state 15
+
+
+state 4
+
+    (8) exp2 -> exp3 .
+    (9) exp3 -> exp3 . AND exp4
+    (10) exp3 -> exp3 . NAND exp4
+
+    XOR             reduce using rule 8 (exp2 -> exp3 .)
+    OR              reduce using rule 8 (exp2 -> exp3 .)
+    NOR             reduce using rule 8 (exp2 -> exp3 .)
+    IMPLIES         reduce using rule 8 (exp2 -> exp3 .)
+    EQUIVALENT      reduce using rule 8 (exp2 -> exp3 .)
+    $end            reduce using rule 8 (exp2 -> exp3 .)
+    RPAREN          reduce using rule 8 (exp2 -> exp3 .)
+    AND             shift and go to state 16
+    NAND            shift and go to state 17
+
+
+state 5
+
+    (11) exp3 -> exp4 .
+
+    AND             reduce using rule 11 (exp3 -> exp4 .)
+    NAND            reduce using rule 11 (exp3 -> exp4 .)
+    XOR             reduce using rule 11 (exp3 -> exp4 .)
+    OR              reduce using rule 11 (exp3 -> exp4 .)
+    NOR             reduce using rule 11 (exp3 -> exp4 .)
+    IMPLIES         reduce using rule 11 (exp3 -> exp4 .)
+    EQUIVALENT      reduce using rule 11 (exp3 -> exp4 .)
+    $end            reduce using rule 11 (exp3 -> exp4 .)
+    RPAREN          reduce using rule 11 (exp3 -> exp4 .)
+
+
+state 6
+
+    (12) exp4 -> NOT . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp4                           shift and go to state 18
+    exp5                           shift and go to state 7
+
+state 7
+
+    (13) exp4 -> exp5 .
+
+    AND             reduce using rule 13 (exp4 -> exp5 .)
+    NAND            reduce using rule 13 (exp4 -> exp5 .)
+    XOR             reduce using rule 13 (exp4 -> exp5 .)
+    OR              reduce using rule 13 (exp4 -> exp5 .)
+    NOR             reduce using rule 13 (exp4 -> exp5 .)
+    IMPLIES         reduce using rule 13 (exp4 -> exp5 .)
+    EQUIVALENT      reduce using rule 13 (exp4 -> exp5 .)
+    $end            reduce using rule 13 (exp4 -> exp5 .)
+    RPAREN          reduce using rule 13 (exp4 -> exp5 .)
+
+
+state 8
+
+    (14) exp5 -> LPAREN . exp RPAREN
+    (1) exp -> . exp IMPLIES exp1
+    (2) exp -> . exp EQUIVALENT exp1
+    (3) exp -> . exp1
+    (4) exp1 -> . exp1 OR exp2
+    (5) exp1 -> . exp1 NOR exp2
+    (6) exp1 -> . exp2
+    (7) exp2 -> . exp2 XOR exp3
+    (8) exp2 -> . exp3
+    (9) exp3 -> . exp3 AND exp4
+    (10) exp3 -> . exp3 NAND exp4
+    (11) exp3 -> . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp                            shift and go to state 19
+    exp1                           shift and go to state 2
+    exp2                           shift and go to state 3
+    exp3                           shift and go to state 4
+    exp4                           shift and go to state 5
+    exp5                           shift and go to state 7
+
+state 9
+
+    (15) exp5 -> TRUE .
+
+    AND             reduce using rule 15 (exp5 -> TRUE .)
+    NAND            reduce using rule 15 (exp5 -> TRUE .)
+    XOR             reduce using rule 15 (exp5 -> TRUE .)
+    OR              reduce using rule 15 (exp5 -> TRUE .)
+    NOR             reduce using rule 15 (exp5 -> TRUE .)
+    IMPLIES         reduce using rule 15 (exp5 -> TRUE .)
+    EQUIVALENT      reduce using rule 15 (exp5 -> TRUE .)
+    $end            reduce using rule 15 (exp5 -> TRUE .)
+    RPAREN          reduce using rule 15 (exp5 -> TRUE .)
+
+
+state 10
+
+    (16) exp5 -> FALSE .
+
+    AND             reduce using rule 16 (exp5 -> FALSE .)
+    NAND            reduce using rule 16 (exp5 -> FALSE .)
+    XOR             reduce using rule 16 (exp5 -> FALSE .)
+    OR              reduce using rule 16 (exp5 -> FALSE .)
+    NOR             reduce using rule 16 (exp5 -> FALSE .)
+    IMPLIES         reduce using rule 16 (exp5 -> FALSE .)
+    EQUIVALENT      reduce using rule 16 (exp5 -> FALSE .)
+    $end            reduce using rule 16 (exp5 -> FALSE .)
+    RPAREN          reduce using rule 16 (exp5 -> FALSE .)
+
+
+state 11
+
+    (1) exp -> exp IMPLIES . exp1
+    (4) exp1 -> . exp1 OR exp2
+    (5) exp1 -> . exp1 NOR exp2
+    (6) exp1 -> . exp2
+    (7) exp2 -> . exp2 XOR exp3
+    (8) exp2 -> . exp3
+    (9) exp3 -> . exp3 AND exp4
+    (10) exp3 -> . exp3 NAND exp4
+    (11) exp3 -> . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp1                           shift and go to state 20
+    exp2                           shift and go to state 3
+    exp3                           shift and go to state 4
+    exp4                           shift and go to state 5
+    exp5                           shift and go to state 7
+
+state 12
+
+    (2) exp -> exp EQUIVALENT . exp1
+    (4) exp1 -> . exp1 OR exp2
+    (5) exp1 -> . exp1 NOR exp2
+    (6) exp1 -> . exp2
+    (7) exp2 -> . exp2 XOR exp3
+    (8) exp2 -> . exp3
+    (9) exp3 -> . exp3 AND exp4
+    (10) exp3 -> . exp3 NAND exp4
+    (11) exp3 -> . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp1                           shift and go to state 21
+    exp2                           shift and go to state 3
+    exp3                           shift and go to state 4
+    exp4                           shift and go to state 5
+    exp5                           shift and go to state 7
+
+state 13
+
+    (4) exp1 -> exp1 OR . exp2
+    (7) exp2 -> . exp2 XOR exp3
+    (8) exp2 -> . exp3
+    (9) exp3 -> . exp3 AND exp4
+    (10) exp3 -> . exp3 NAND exp4
+    (11) exp3 -> . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp2                           shift and go to state 22
+    exp3                           shift and go to state 4
+    exp4                           shift and go to state 5
+    exp5                           shift and go to state 7
+
+state 14
+
+    (5) exp1 -> exp1 NOR . exp2
+    (7) exp2 -> . exp2 XOR exp3
+    (8) exp2 -> . exp3
+    (9) exp3 -> . exp3 AND exp4
+    (10) exp3 -> . exp3 NAND exp4
+    (11) exp3 -> . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp2                           shift and go to state 23
+    exp3                           shift and go to state 4
+    exp4                           shift and go to state 5
+    exp5                           shift and go to state 7
+
+state 15
+
+    (7) exp2 -> exp2 XOR . exp3
+    (9) exp3 -> . exp3 AND exp4
+    (10) exp3 -> . exp3 NAND exp4
+    (11) exp3 -> . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp3                           shift and go to state 24
+    exp4                           shift and go to state 5
+    exp5                           shift and go to state 7
+
+state 16
+
+    (9) exp3 -> exp3 AND . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp4                           shift and go to state 25
+    exp5                           shift and go to state 7
+
+state 17
+
+    (10) exp3 -> exp3 NAND . exp4
+    (12) exp4 -> . NOT exp4
+    (13) exp4 -> . exp5
+    (14) exp5 -> . LPAREN exp RPAREN
+    (15) exp5 -> . TRUE
+    (16) exp5 -> . FALSE
+
+    NOT             shift and go to state 6
+    LPAREN          shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+
+    exp4                           shift and go to state 26
+    exp5                           shift and go to state 7
+
+state 18
+
+    (12) exp4 -> NOT exp4 .
+
+    AND             reduce using rule 12 (exp4 -> NOT exp4 .)
+    NAND            reduce using rule 12 (exp4 -> NOT exp4 .)
+    XOR             reduce using rule 12 (exp4 -> NOT exp4 .)
+    OR              reduce using rule 12 (exp4 -> NOT exp4 .)
+    NOR             reduce using rule 12 (exp4 -> NOT exp4 .)
+    IMPLIES         reduce using rule 12 (exp4 -> NOT exp4 .)
+    EQUIVALENT      reduce using rule 12 (exp4 -> NOT exp4 .)
+    $end            reduce using rule 12 (exp4 -> NOT exp4 .)
+    RPAREN          reduce using rule 12 (exp4 -> NOT exp4 .)
+
+
+state 19
+
+    (14) exp5 -> LPAREN exp . RPAREN
+    (1) exp -> exp . IMPLIES exp1
+    (2) exp -> exp . EQUIVALENT exp1
+
+    RPAREN          shift and go to state 27
+    IMPLIES         shift and go to state 11
+    EQUIVALENT      shift and go to state 12
+
+
+state 20
+
+    (1) exp -> exp IMPLIES exp1 .
+    (4) exp1 -> exp1 . OR exp2
+    (5) exp1 -> exp1 . NOR exp2
+
+    IMPLIES         reduce using rule 1 (exp -> exp IMPLIES exp1 .)
+    EQUIVALENT      reduce using rule 1 (exp -> exp IMPLIES exp1 .)
+    $end            reduce using rule 1 (exp -> exp IMPLIES exp1 .)
+    RPAREN          reduce using rule 1 (exp -> exp IMPLIES exp1 .)
+    OR              shift and go to state 13
+    NOR             shift and go to state 14
+
+
+state 21
+
+    (2) exp -> exp EQUIVALENT exp1 .
+    (4) exp1 -> exp1 . OR exp2
+    (5) exp1 -> exp1 . NOR exp2
+
+    IMPLIES         reduce using rule 2 (exp -> exp EQUIVALENT exp1 .)
+    EQUIVALENT      reduce using rule 2 (exp -> exp EQUIVALENT exp1 .)
+    $end            reduce using rule 2 (exp -> exp EQUIVALENT exp1 .)
+    RPAREN          reduce using rule 2 (exp -> exp EQUIVALENT exp1 .)
+    OR              shift and go to state 13
+    NOR             shift and go to state 14
+
+
+state 22
+
+    (4) exp1 -> exp1 OR exp2 .
+    (7) exp2 -> exp2 . XOR exp3
+
+    OR              reduce using rule 4 (exp1 -> exp1 OR exp2 .)
+    NOR             reduce using rule 4 (exp1 -> exp1 OR exp2 .)
+    IMPLIES         reduce using rule 4 (exp1 -> exp1 OR exp2 .)
+    EQUIVALENT      reduce using rule 4 (exp1 -> exp1 OR exp2 .)
+    $end            reduce using rule 4 (exp1 -> exp1 OR exp2 .)
+    RPAREN          reduce using rule 4 (exp1 -> exp1 OR exp2 .)
+    XOR             shift and go to state 15
+
+
+state 23
+
+    (5) exp1 -> exp1 NOR exp2 .
+    (7) exp2 -> exp2 . XOR exp3
+
+    OR              reduce using rule 5 (exp1 -> exp1 NOR exp2 .)
+    NOR             reduce using rule 5 (exp1 -> exp1 NOR exp2 .)
+    IMPLIES         reduce using rule 5 (exp1 -> exp1 NOR exp2 .)
+    EQUIVALENT      reduce using rule 5 (exp1 -> exp1 NOR exp2 .)
+    $end            reduce using rule 5 (exp1 -> exp1 NOR exp2 .)
+    RPAREN          reduce using rule 5 (exp1 -> exp1 NOR exp2 .)
+    XOR             shift and go to state 15
+
+
+state 24
+
+    (7) exp2 -> exp2 XOR exp3 .
+    (9) exp3 -> exp3 . AND exp4
+    (10) exp3 -> exp3 . NAND exp4
+
+    XOR             reduce using rule 7 (exp2 -> exp2 XOR exp3 .)
+    OR              reduce using rule 7 (exp2 -> exp2 XOR exp3 .)
+    NOR             reduce using rule 7 (exp2 -> exp2 XOR exp3 .)
+    IMPLIES         reduce using rule 7 (exp2 -> exp2 XOR exp3 .)
+    EQUIVALENT      reduce using rule 7 (exp2 -> exp2 XOR exp3 .)
+    $end            reduce using rule 7 (exp2 -> exp2 XOR exp3 .)
+    RPAREN          reduce using rule 7 (exp2 -> exp2 XOR exp3 .)
+    AND             shift and go to state 16
+    NAND            shift and go to state 17
+
+
+state 25
+
+    (9) exp3 -> exp3 AND exp4 .
+
+    AND             reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    NAND            reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    XOR             reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    OR              reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    NOR             reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    IMPLIES         reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    EQUIVALENT      reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    $end            reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+    RPAREN          reduce using rule 9 (exp3 -> exp3 AND exp4 .)
+
+
+state 26
+
+    (10) exp3 -> exp3 NAND exp4 .
+
+    AND             reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    NAND            reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    XOR             reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    OR              reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    NOR             reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    IMPLIES         reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    EQUIVALENT      reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    $end            reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+    RPAREN          reduce using rule 10 (exp3 -> exp3 NAND exp4 .)
+
+
+state 27
+
+    (14) exp5 -> LPAREN exp RPAREN .
+
+    AND             reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    NAND            reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    XOR             reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    OR              reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    NOR             reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    IMPLIES         reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    EQUIVALENT      reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    $end            reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+    RPAREN          reduce using rule 14 (exp5 -> LPAREN exp RPAREN .)
+
