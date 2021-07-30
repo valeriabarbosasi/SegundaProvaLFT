@@ -108,6 +108,8 @@ class Exp5False(Exp):
  def accept(self, Visitor):
   Visitor.visitExp5False(self)
 
+
+
 class Visitor():
 
  def visitExpImplies(self, expImplies):
@@ -120,34 +122,39 @@ class Visitor():
   print ('==')
   expEquivalent.exp2.accept(self)
 
-  def visitExp_Exp1(self, exp_Exp1):
-   exp_Exp1.exp1.accept(self)
-   print ('||')
-   exp_Exp1.exp2.accept(self)
+  def visitExp3Nand(self, exp3Nand):
+   exp3Nand.exp1.accept(self)
+   print ('!&')
+   exp3Nand.exp2.accept(self)
 
   def visitExp1Or(self, exp1Or):
    exp1Or.exp1.accept(self)
-   print ('!|')
+   print ('||')
    exp1Or.exp2.accept(self) 
 
   def visitExp1Nor(self, exp1Nor):
    exp1Nor.exp1.accept(self)
-   print ('NOR')
+   print ('!|')
    exp1Nor.exp2.accept(self)
 
-  def visitExp1_Exp2(self, exp1_Exp2):
-   exp1_Exp2.exp1.accept(self)
-   print ('AND')
-   exp1_Exp2.exp2.accept(self)
+  def visitExp3And(self, exp3And):
+   exp3And.exp1.accept(self)
+   print ('&&')
+   exp3And.exp2.accept(self)
 
   def visitExp2Xor(self, exp2Xor):
    exp2Xor.exp1.accept(self)
-   print ('NAND')
+   print ('|')
    exp2Xor.exp2.accept(self)
 
-  def visitExp2_Exp3(self, exp2_Exp3):
-   print ('NOT')
-   exp2_Exp3.exp2.accept(self)
+  def visitExp4Not(self, exp4Not):
+   print ('!')
+   Exp4Not.exp2.accept(self)
+  
+  def visitExp5Parentesis(self, exp5Parentesis):
+   print ('(')
+   exp5Parentesis.exp2.accept(self)
+   print (')')
 
   def visitExp5True(self, exp5True):
    print ('True') 
