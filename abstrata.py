@@ -109,7 +109,6 @@ class Exp5False(Exp):
   Visitor.visitExp5False(self)
 
 
-
 class Visitor():
 
  def visitExpImplies(self, expImplies):
