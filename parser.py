@@ -6,7 +6,22 @@ def p_exp(p):
   '''exp : exp IMPLIES exp1
   | exp EQUIVALENT exp1
   | exp1 '''
-  
+  if(len(p)==2):
+   p[0] = p[1]
+  elif (p[2] == '=='):
+    
+    if((p[1] == 'true') and (p[3] == 'true')):
+      p[0] = 'true'
+    elif((p[1] == 'false') and (p[3] == 'false')):
+      p[0] = 'true'
+    else:
+      p[0] = 'false'
+  else:
+    if((p[1] == 'true') and (p[3] == 'false')):
+      p[0] = 'false'
+    else:
+      p[0] = 'true'
+
 def p_exp1(p):
   '''exp1 : exp1 OR exp2
   | exp1 NOR exp2
@@ -35,3 +50,11 @@ def p_error(p):
   print('Error') 
   
 parser = yacc.yacc()
+while True:
+ try:
+     s = input('calc > ')
+ except EOFError:
+     break
+ if not s: continue
+ result = parser.parse(s)
+ print(result)

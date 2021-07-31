@@ -31,10 +31,6 @@ t_RPAREN  = r'\)'
 t_TRUE = r'true'
 t_FALSE = r'false'
 
-def t_NUMBER(t):
-   r'\d+'
-   t.value = int(t.value)
-   return t
 
 # Error handling rule
 def t_error(t):
